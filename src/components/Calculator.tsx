@@ -1,28 +1,28 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { calculate } from "@/lib/calc";
+import { calculate, type PricingMode } from "@/lib/calc";
 import { FEES } from "@/config/fees";
 import { formatCents, parseDollarsToCents } from "@/lib/money";
 import ShippingCostHelper from "./ShippingCostHelper";
 import CogsHelper from "./CogsHelper";
 
 interface Field {
-  key: "salePrice" | "shippingCharged" | "shippingCost" | "cogs";
+  key: "shippingCharged" | "shippingCost" | "cogs";
   label: string;
   hint: string;
 }
 
-const FIELDS: Field[] = [
-  { key: "salePrice", label: "Sale price (per card)", hint: "Listed price" },
+const OTHER_FIELDS: Field[] = [
   { key: "shippingCharged", label: "Shipping charged", hint: "What the buyer pays" },
   { key: "shippingCost", label: "Your shipping cost", hint: "Postage + envelope/sleeve" },
   { key: "cogs", label: "Card cost (per card)", hint: "What you paid for it" },
 ];
 
 export default function Calculator() {
+  const [pricingMode, setPricingMode] = useState<PricingMode>("perCard");
+  const [salePrice, setSalePrice] = useState("");
   const [values, setValues] = useState<Record<Field["key"], string>>({
-    salePrice: "",
     shippingCharged: "",
     shippingCost: "",
     cogs: "",
@@ -32,13 +32,14 @@ export default function Calculator() {
   const result = useMemo(
     () =>
       calculate({
-        salePriceCents: parseDollarsToCents(values.salePrice),
+        salePriceCents: parseDollarsToCents(salePrice),
+        pricingMode,
         shippingChargedCents: parseDollarsToCents(values.shippingCharged),
         shippingCostCents: parseDollarsToCents(values.shippingCost),
         cogsCents: parseDollarsToCents(values.cogs),
         quantity: parseInt(qty, 10) || 0,
       }),
-    [values, qty]
+    [salePrice, pricingMode, values, qty]
   );
 
   const profitable = result.netCents > 0;
@@ -47,7 +48,57 @@ export default function Calculator() {
   return (
     <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {FIELDS.map((f) => (
+        <label className="block">
+          <div className="mb-1 flex items-center justify-between">
+            <span className="text-sm font-medium text-zinc-300">
+              {pricingMode === "perCard" ? "Sale price (per card)" : "Order subtotal (all cards)"}
+            </span>
+            <div className="flex overflow-hidden rounded border border-zinc-700 text-[11px]">
+              <button
+                type="button"
+                onClick={() => setPricingMode("perCard")}
+                className={`px-2 py-0.5 ${
+                  pricingMode === "perCard"
+                    ? "bg-emerald-500 text-zinc-950"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                Per card
+              </button>
+              <button
+                type="button"
+                onClick={() => setPricingMode("orderSubtotal")}
+                className={`px-2 py-0.5 ${
+                  pricingMode === "orderSubtotal"
+                    ? "bg-emerald-500 text-zinc-950"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                Order total
+              </button>
+            </div>
+          </div>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-zinc-500">
+              $
+            </span>
+            <input
+              type="text"
+              inputMode="decimal"
+              placeholder="0.00"
+              value={salePrice}
+              onChange={(e) => setSalePrice(e.target.value)}
+              className="w-full rounded-lg border border-zinc-700 bg-zinc-950 py-2.5 pl-7 pr-3 text-base text-zinc-100 outline-none focus:border-emerald-500"
+            />
+          </div>
+          <span className="mt-1 block text-xs text-zinc-500">
+            {pricingMode === "perCard"
+              ? "Same price on every card — multiplied by quantity"
+              : "Different-priced cards in one order — enter the item subtotal, not multiplied by quantity"}
+          </span>
+        </label>
+
+        {OTHER_FIELDS.map((f) => (
           <label key={f.key} className="block">
             <span className="mb-1 block text-sm font-medium text-zinc-300">
               {f.label}
@@ -103,6 +154,10 @@ export default function Calculator() {
             onChange={(e) => setQty(e.target.value)}
             className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-base text-zinc-100 outline-none focus:border-emerald-500"
           />
+          <span className="mt-1 block text-xs text-zinc-500">
+            Total cards in the order — still used for card cost and per-card
+            supply costs, even in &quot;Order total&quot; mode
+          </span>
         </label>
       </div>
 
