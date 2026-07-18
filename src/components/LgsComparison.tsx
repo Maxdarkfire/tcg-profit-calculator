@@ -110,17 +110,20 @@ export default function LgsComparison() {
       <div className="mt-6 space-y-2 border-t border-zinc-800 pt-5 text-sm">
         <ResultRow
           label="Sell online (TCGplayer)"
+          timing="Days–weeks, sometimes months for niche cards"
           cents={hasInput ? result.onlineNet : null}
           marketCents={marketCents}
           highlight
         />
         <ResultRow
           label="LGS — cash"
+          timing="Instant"
           cents={hasInput ? result.cash : null}
           marketCents={marketCents}
         />
         <ResultRow
           label="LGS — store credit"
+          timing="Instant"
           cents={hasInput ? result.credit : null}
           marketCents={marketCents}
         />
@@ -137,8 +140,12 @@ export default function LgsComparison() {
         all: bulk cards (roughly under $2–5 market value) are usually bought
         flat-rate or by weight/box instead of as a % of value, and often much
         lower than these percentages suggest — and everything here assumes
-        Near Mint condition, since any wear drops the offer fast. Use this
-        for a ballpark, not a final decision.
+        Near Mint condition, since any wear drops the offer fast. Timing
+        matters too, not just the dollar amount: an LGS pays out the moment
+        you walk in, while an online listing sits until someone buys it —
+        instant, lower money can beat waiting weeks for a higher number if
+        you need the cash now or the card&apos;s price is likely to drop
+        before it sells. Use this for a ballpark, not a final decision.
       </p>
     </div>
   );
@@ -146,11 +153,13 @@ export default function LgsComparison() {
 
 function ResultRow({
   label,
+  timing,
   cents,
   marketCents,
   highlight,
 }: {
   label: string;
+  timing: string;
   cents: number | null;
   marketCents: number;
   highlight?: boolean;
@@ -161,8 +170,15 @@ function ResultRow({
       : null;
   return (
     <div className="flex items-baseline justify-between">
-      <span className={highlight ? "font-medium text-zinc-200" : "text-zinc-400"}>
-        {label}
+      <span>
+        <span
+          className={
+            highlight ? "font-medium text-zinc-200" : "text-zinc-400"
+          }
+        >
+          {label}
+        </span>
+        <span className="ml-2 text-[11px] text-zinc-600">{timing}</span>
       </span>
       <span className="flex items-baseline gap-2">
         {pct !== null && (
