@@ -1,4 +1,4 @@
-import Calculator from "@/components/Calculator";
+import ToolTabs from "@/components/ToolTabs";
 import EmailSignup from "@/components/EmailSignup";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
         </p>
       </header>
 
-      <Calculator />
+      <ToolTabs />
 
       <section className="mt-12 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
         <h2 className="text-xl font-semibold">
