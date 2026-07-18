@@ -4,10 +4,22 @@ ts/**
  * Rates apply to standard Marketplace Seller accounts (Levels 1-4), which is
  * what a small/hobby seller has. Pro/Sync accounts pay 9.25% + a 2.5% Pro fee
  * instead — not modeled here. TCGplayer Direct has a separate fee structure
- * (flat per-item fee) — also not modeled here.
+ * (flat per-item fee) — also not modeled here. International orders pay a
+ * 3.5% transaction fee instead of 2.5% — not modeled here.
  *
- * Verified against a real packing slip: $2.65 order (4x $0.29 cards +
+ * Per TCGplayer's official fee schedule (help.tcgplayer.com), the Marketplace
+ * Commission Fee is "order subtotal x 10.75%" and the Transaction Fee is
+ * "(order total [items + shipping + tax]) x 2.5% + $0.30". With no sales tax,
+ * subtotal and total both equal items + shipping, which is what's modeled
+ * here — verified against a real packing slip: $2.65 order (4x $0.29 cards +
  * $1.49 shipping) charged exactly $0.65 in fees / $2.00 net at these rates.
+ *
+ * Known simplifications (rare edge cases, not modeled):
+ * - TCGplayer uses Bankers Rounding (round-half-to-even); this app uses
+ *   standard rounding. Differences are at most $0.01 per fee line.
+ * - Commission fee is capped at $75 per product sold — irrelevant below
+ *   ~$700 per card at these rates, so not implemented.
+ * - Sales tax (would be added to the transaction-fee base) is not modeled.
  *
  * All money math elsewhere in the app is integer cents.
  */
