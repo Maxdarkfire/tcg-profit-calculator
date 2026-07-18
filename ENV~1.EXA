@@ -1,0 +1,4 @@
+# Server-side only. Create a Supabase project, run supabase/schema.sql,
+# then copy Project URL + service_role key here (and into Vercel env vars).
+SUPABASE_URL=https://YOUR-PROJECT.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=YOUR-SERVICE-ROLE-KEY
