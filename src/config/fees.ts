@@ -1,4 +1,4 @@
-ts/**
+/**
  * All fee rates live HERE and only here.
  *
  * Rates apply to standard Marketplace Seller accounts (Levels 1-4), which is
