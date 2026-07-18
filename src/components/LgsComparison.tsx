@@ -140,9 +140,8 @@ export default function LgsComparison() {
         all: bulk cards (roughly under $2–5 market value) are usually bought
         flat-rate or by weight/box instead of as a % of value, and often much
         lower than these percentages suggest — and everything here assumes
-        Near Mint condition, since any wear drops the offer fast. 
-        
-        Timing matters too, not just the dollar amount: an LGS pays out the moment
+        Near Mint condition, since any wear drops the offer fast. Timing matters 
+        too, not just the dollar amount: an LGS pays out the moment
         you agree in store, while an online listing sits until someone buys it —
         instant, lower money can beat waiting weeks for a higher number if
         you need the cash now or the card&apos;s price is likely to drop
