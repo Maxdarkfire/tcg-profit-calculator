@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TCGplayer Profit Calculator — What Do You Actually Make?",
+  title: "TCG Profit Calculator — What Do You Actually Make?",
   description:
-    "Free calculator for TCGplayer sellers: see marketplace fees, payment processing fees, and your true net profit and margin on any sale.",
+    "Free calculator for TCG sellers: see marketplace fees, payment processing fees, and your true net profit and margin on any sale.",
 };
 
 export const viewport: Viewport = {
