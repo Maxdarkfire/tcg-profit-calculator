@@ -6,11 +6,11 @@ export default function Home() {
     <main className="mx-auto max-w-xl px-4 py-10 sm:py-16">
       <header className="mb-8 text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          TCGplayer Profit Calculator
+          TCG Profit Calculator
         </h1>
         <p className="mt-3 text-zinc-400">
           Fees, processing, shipping, card cost — see what you{" "}
-          <span className="font-semibold text-zinc-200">actually</span> make on
+          <span className="font-semibold text-zinc-200">actually</span> can make on
           a sale.
         </p>
       </header>
