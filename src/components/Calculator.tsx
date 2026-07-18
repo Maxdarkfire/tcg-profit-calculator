@@ -120,7 +120,11 @@ export default function Calculator() {
       <p className="mt-5 text-xs leading-relaxed text-zinc-500">
         Fee rates last verified: {FEES.lastVerified}. Estimates only — actual
         fees depend on your seller level and TCGplayer&apos;s current fee
-        schedule.
+        schedule, and exclude buyer sales tax. TCGplayer factors tax into its
+        fee calculation for taxable-state orders but doesn&apos;t show sellers
+        the tax amount, so this calculator can&apos;t account for it — actual
+        fees may run higher than shown, especially on higher-value sales to
+        taxable states.
       </p>
     </div>
   );
