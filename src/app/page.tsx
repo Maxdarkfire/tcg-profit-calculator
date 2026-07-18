@@ -10,7 +10,7 @@ export default function Home() {
         </h1>
         <p className="mt-3 text-zinc-400">
           Fees, processing, shipping, card cost — see what you{" "}
-          <span className="font-semibold text-zinc-200">actually</span> can make on
+          <span className="font-semibold text-zinc-200">actually</span> make on
           a sale.
         </p>
       </header>
@@ -27,10 +27,15 @@ export default function Home() {
           sellers. Get the beta:
         </p>
         <EmailSignup />
+        <p className="mt-2 text-xs text-zinc-600">
+          Only used to notify you about the beta — no spam, unsubscribe
+          anytime.
+        </p>
       </section>
 
       <footer className="mt-10 text-center text-xs text-zinc-600">
-        Not affiliated with TCGplayer. Estimates only.
+        Not affiliated with TCGplayer. For informational purposes only —
+        not financial or tax advice. Estimates only.
       </footer>
     </main>
   );
