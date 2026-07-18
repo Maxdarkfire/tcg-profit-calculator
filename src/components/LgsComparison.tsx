@@ -82,7 +82,7 @@ export default function LgsComparison() {
             </span>
           </div>
           <span className="mt-1 block text-xs text-zinc-500">
-            % of market value, typical range
+            Typical range: 40–60%
           </span>
         </label>
         <label className="block">
@@ -102,7 +102,7 @@ export default function LgsComparison() {
             </span>
           </div>
           <span className="mt-1 block text-xs text-zinc-500">
-            % of market value, typical range
+            Typical range: 50–70%
           </span>
         </label>
       </div>
@@ -130,9 +130,15 @@ export default function LgsComparison() {
         &quot;Sell online&quot; assumes free shipping to the buyer and typical
         supply costs ({formatCents(TYPICAL_SHIPPING_CENTS)}) — a listing where
         you charge for shipping would net more. LGS percentages are rough,
-        commonly-cited ranges, not a real quote — actual offers vary a lot by
-        store, condition, demand, and how well the card is currently selling
-        for them. Use this for a ballpark, not a final decision.
+        commonly-cited ranges, not a real quote — high-demand tournament
+        staples trend toward the top of the range, niche or rotating cards
+        toward the bottom, and store credit usually runs 10–20 points higher
+        than cash at the same store. Two things this doesn&apos;t model at
+        all: bulk cards (roughly under $2–5 market value) are usually bought
+        flat-rate or by weight/box instead of as a % of value, and often much
+        lower than these percentages suggest — and everything here assumes
+        Near Mint condition, since any wear drops the offer fast. Use this
+        for a ballpark, not a final decision.
       </p>
     </div>
   );
