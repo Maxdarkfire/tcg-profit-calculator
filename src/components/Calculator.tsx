@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { calculate } from "@/lib/calc";
 import { FEES } from "@/config/fees";
 import { formatCents, parseDollarsToCents } from "@/lib/money";
+import ShippingCostHelper from "./ShippingCostHelper";
 
 interface Field {
   key: "salePrice" | "shippingCharged" | "shippingCost" | "cogs";
@@ -66,6 +67,17 @@ export default function Calculator() {
               />
             </div>
             <span className="mt-1 block text-xs text-zinc-500">{f.hint}</span>
+            {f.key === "shippingCost" && (
+              <ShippingCostHelper
+                quantity={parseInt(qty, 10) || 1}
+                onApply={(cents) =>
+                  setValues((v) => ({
+                    ...v,
+                    shippingCost: (cents / 100).toFixed(2),
+                  }))
+                }
+              />
+            )}
           </label>
         ))}
         <label className="block">
